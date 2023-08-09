@@ -33,6 +33,7 @@ public class MuseumController {
     MuseumDto museumDto = ModelDtoConverter.modelToDto(newMuseum);
     return ResponseEntity.status(HttpStatus.CREATED).body(museumDto);
   }
+
   /** Retorna o museu mais próximo de uma localização dada. */
   @GetMapping("/closest")
   public ResponseEntity<MuseumDto> getClosestMuseums(
