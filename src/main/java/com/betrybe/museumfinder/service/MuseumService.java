@@ -1,4 +1,3 @@
-
 package com.betrybe.museumfinder.service;
 
 import com.betrybe.museumfinder.database.MuseumFakeDatabase;
@@ -12,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Um serviço que implementa a interface MuseumServiceInterface e oferece
- * funcionalidades relacionadas aos museus.
- */
+ * funcionalidades relacionadas aos museus.*/
 
 @Service
 public class MuseumService implements MuseumServiceInterface {
@@ -21,30 +19,30 @@ public class MuseumService implements MuseumServiceInterface {
   private final MuseumFakeDatabase museumFakeDatabase;
 
   @Autowired
-    public MuseumService(MuseumFakeDatabase museumFakeDatabase) {
+  public MuseumService(MuseumFakeDatabase museumFakeDatabase) {
     this.museumFakeDatabase = museumFakeDatabase;
   }
 
   @Override
-    public Museum getClosestMuseum(Coordinate coordinate, Double maxDistance) {
+  public Museum getClosestMuseum(Coordinate coordinate, Double maxDistance) {
     if (!CoordinateUtil.isCoordinateValid(coordinate)) {
-      throw new InvalidCoordinateException("invalido");
+      throw new InvalidCoordinateException();
     }
-    return museumFakeDatabase.getClosestMuseum(coordinate, maxDistance).orElseThrow(
-            () -> new MuseumNotFoundException("nenhum museu encontrado."));
+    return museumFakeDatabase.getClosestMuseum(coordinate, maxDistance)
+            .orElseThrow(MuseumNotFoundException::new);
   }
 
   @Override
-    public Museum createMuseum(Museum museum) {
+  public Museum createMuseum(Museum museum) {
 
     if (!CoordinateUtil.isCoordinateValid(museum.getCoordinate())) {
-      throw new InvalidCoordinateException("invalido");
+      throw new InvalidCoordinateException();
     }
     return museumFakeDatabase.saveMuseum(museum);
   }
 
   @Override
-    public Museum getMuseum(Long id) {
+  public Museum getMuseum(Long id) {
     return null;
   }
 }

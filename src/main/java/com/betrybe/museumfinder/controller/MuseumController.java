@@ -22,13 +22,13 @@ public class MuseumController {
   private final MuseumServiceInterface museumServiceInterface;
 
   @Autowired
-    public MuseumController(MuseumServiceInterface museumServiceInterface) {
+  public MuseumController(MuseumServiceInterface museumServiceInterface) {
     this.museumServiceInterface = museumServiceInterface;
   }
 
   /** Cria um novo museu e o retorna como um objeto MuseumDto. */
   @PostMapping
-    public ResponseEntity<MuseumDto> createMuseum(@RequestBody Museum museum) {
+  public ResponseEntity<MuseumDto> createMuseum(@RequestBody Museum museum) {
     Museum newMuseum = museumServiceInterface.createMuseum(museum);
     MuseumDto museumDto = ModelDtoConverter.modelToDto(newMuseum);
     return ResponseEntity.status(HttpStatus.CREATED).body(museumDto);
